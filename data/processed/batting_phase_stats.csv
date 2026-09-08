@@ -1,0 +1,46 @@
+batting_team,phase,runs,balls,boundaries,dots,run_rate,boundary_pct,dot_ball_pct
+Chennai Super Kings,death,9061,5295,1128,1235,10.2674,0.213,0.2332
+Chennai Super Kings,middle,18577,14518,1951,4367,7.6775,0.1344,0.3008
+Chennai Super Kings,powerplay,10991,8838,1626,4076,7.4616,0.184,0.4612
+Deccan Chargers,death,2539,1659,291,441,9.1826,0.1754,0.2658
+Deccan Chargers,middle,5507,4556,564,1485,7.2524,0.1238,0.3259
+Deccan Chargers,powerplay,3417,2819,502,1301,7.2728,0.1781,0.4615
+Delhi Capitals,death,8184,5128,1028,1408,9.5757,0.2005,0.2746
+Delhi Capitals,middle,18943,15168,1981,4678,7.4933,0.1306,0.3084
+Delhi Capitals,powerplay,12069,9436,1850,4208,7.6742,0.1961,0.446
+Gujarat Lions,death,921,613,111,164,9.0147,0.1811,0.2675
+Gujarat Lions,middle,2382,1828,261,515,7.8184,0.1428,0.2817
+Gujarat Lions,powerplay,1559,1125,243,476,8.3147,0.216,0.4231
+Gujarat Titans,death,1823,1031,241,241,10.6091,0.2338,0.2338
+Gujarat Titans,middle,3750,2777,396,716,8.1023,0.1426,0.2578
+Gujarat Titans,powerplay,2184,1686,325,705,7.7722,0.1928,0.4181
+Kochi Tuskers Kerala,death,337,238,35,65,8.4958,0.1471,0.2731
+Kochi Tuskers Kerala,middle,884,811,85,288,6.5401,0.1048,0.3551
+Kochi Tuskers Kerala,powerplay,680,533,103,242,7.6548,0.1932,0.454
+Kolkata Knight Riders,death,8053,5025,1017,1362,9.6155,0.2024,0.271
+Kolkata Knight Riders,middle,19337,15054,2134,4846,7.7071,0.1418,0.3219
+Kolkata Knight Riders,powerplay,11941,9435,1805,4282,7.5936,0.1913,0.4538
+Lucknow Super Giants,death,1718,1025,215,256,10.0566,0.2098,0.2498
+Lucknow Super Giants,middle,3712,2731,394,778,8.1553,0.1443,0.2849
+Lucknow Super Giants,powerplay,2080,1644,300,747,7.5912,0.1825,0.4544
+Mumbai Indians,death,9598,5713,1253,1571,10.0802,0.2193,0.275
+Mumbai Indians,middle,20353,15880,2260,5067,7.6901,0.1423,0.3191
+Mumbai Indians,powerplay,12225,9844,1809,4539,7.4512,0.1838,0.4611
+Pune Warriors,death,1360,1007,149,320,8.1033,0.148,0.3178
+Pune Warriors,middle,3103,2756,303,984,6.7554,0.1099,0.357
+Pune Warriors,powerplay,1895,1680,269,795,6.7679,0.1601,0.4732
+Punjab Kings,death,8274,5314,1014,1491,9.3421,0.1908,0.2806
+Punjab Kings,middle,19531,14933,2135,4641,7.8475,0.143,0.3108
+Punjab Kings,powerplay,11795,9232,1792,4122,7.6657,0.1941,0.4465
+Rajasthan Royals,death,7281,4641,886,1262,9.4131,0.1909,0.2719
+Rajasthan Royals,middle,17240,13408,1851,4180,7.7148,0.1381,0.3118
+Rajasthan Royals,powerplay,10226,8193,1591,3839,7.4888,0.1942,0.4686
+Rising Pune Supergiants,death,998,604,119,154,9.9139,0.197,0.255
+Rising Pune Supergiants,middle,2112,1756,198,527,7.2164,0.1128,0.3001
+Rising Pune Supergiants,powerplay,1423,1120,208,456,7.6232,0.1857,0.4071
+Royal Challengers Bengaluru,death,9028,5298,1172,1413,10.2242,0.2212,0.2667
+Royal Challengers Bengaluru,middle,19799,15223,2097,4607,7.8036,0.1378,0.3026
+Royal Challengers Bengaluru,powerplay,11795,9502,1762,4324,7.4479,0.1854,0.4551
+Sunrisers Hyderabad,death,6237,3993,752,1081,9.3719,0.1883,0.2707
+Sunrisers Hyderabad,middle,13897,11032,1388,3306,7.5582,0.1258,0.2997
+Sunrisers Hyderabad,powerplay,8937,6818,1307,2877,7.8648,0.1917,0.422

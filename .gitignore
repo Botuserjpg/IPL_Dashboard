@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Environment variables / secrets
+.env
+.env.*
+!*.env.example
+
+# Local data & model caches
+models/*.joblib
+models/*.csv
+models/sklearn_version.txt
+catboost_info/
+logs/
+notebooks/
+data/test_set.csv
+
+# Local generated / training artifacts
+evaluation_results.csv
+evaluation_steps.txt
+environment.txt
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Misc logs
+*.log

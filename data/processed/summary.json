@@ -1,0 +1,26 @@
+{
+  "seasons": 17,
+  "matches": 1095,
+  "deliveries": 260920,
+  "teams": [
+    "Chennai Super Kings",
+    "Deccan Chargers",
+    "Delhi Capitals",
+    "Gujarat Lions",
+    "Gujarat Titans",
+    "Kochi Tuskers Kerala",
+    "Kolkata Knight Riders",
+    "Lucknow Super Giants",
+    "Mumbai Indians",
+    "Pune Warriors",
+    "Punjab Kings",
+    "Rajasthan Royals",
+    "Rising Pune Supergiants",
+    "Royal Challengers Bengaluru",
+    "Sunrisers Hyderabad"
+  ],
+  "best_match_model": "xgboost",
+  "best_score_model": "xgboost_regressor",
+  "data_source": "data/raw/matches.csv + data/raw/deliveries.csv",
+  "synthetic_data_used": false
+}

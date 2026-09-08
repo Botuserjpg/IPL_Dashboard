@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPL Match Prediction System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --ipl-purple: #6d28d9;
+    --ipl-purple-light: #8b5cf6;
+    --ipl-gold: #f5b004;
+    --ipl-gold-light: #ffd24a;
+    --ipl-bg: #0b0f24;
+    --ipl-card: #131737;
+    --ipl-card-border: rgba(255,255,255,0.08);
+    --ipl-text: #e6e9ff;
+    --ipl-muted: #8b90b5;
+    --ipl-green: #22c55e;
+    --ipl-red: #ef4444;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background:
+      radial-gradient(1200px 500px at 85% -10%, rgba(109,40,217,0.28), transparent 60%),
+      radial-gradient(900px 400px at -10% 0%, rgba(245,176,4,0.12), transparent 55%),
+      linear-gradient(160deg, #0b0f24 0%, #0d1130 55%, #101536 100%);
+    background-attachment: fixed;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--ipl-text);
+    min-height: 100vh;
+  }
+  .wrap { max-width: 1400px; margin: 0 auto; padding: 26px 28px 60px; }
+
+  .hero {
+    background: linear-gradient(120deg, rgba(109,40,217,0.95), rgba(139,92,246,0.75) 45%, rgba(245,176,4,0.75));
+    border-radius: 22px;
+    padding: 30px 36px;
+    margin-bottom: 22px;
+    color: #fff;
+    box-shadow: 0 18px 50px -18px rgba(109,40,217,0.65);
+  }
+  .hero h1 { margin: 0 0 6px; font-size: 2.3rem; font-weight: 900; letter-spacing: -0.02em; }
+  .hero p { margin: 0; font-size: 1.02rem; opacity: 0.92; }
+  .hero .chips { margin-top: 12px; }
+  .chip {
+    display: inline-block;
+    background: rgba(0,0,0,0.22);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 999px;
+    padding: 4px 14px;
+    margin: 4px 8px 0 0;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 26px; }
+  .kpi {
+    background: linear-gradient(150deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+    border: 1px solid var(--ipl-card-border);
+    border-radius: 16px;
+    padding: 18px 20px;
+  }
+  .kpi .label { color: var(--ipl-muted); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+  .kpi .value { font-size: 1.9rem; font-weight: 800; margin-top: 4px; }
+  .kpi .sub { color: var(--ipl-muted); font-size: 0.82rem; margin-top: 2px; }
+
+  .tabs { display: flex; gap: 8px; border-bottom: 1px solid var(--ipl-card-border); margin-bottom: 24px; overflow-x: auto; }
+  .tab {
+    background: rgba(255,255,255,0.04);
+    border: none;
+    border-radius: 12px 12px 0 0;
+    padding: 10px 20px;
+    color: var(--ipl-muted);
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+  .tab:hover { color: var(--ipl-text); }
+  .tab.active {
+    background: linear-gradient(135deg, rgba(109,40,217,0.9), rgba(139,92,246,0.7));
+    color: #fff;
+  }
+  .tabview { display: none; animation: fadein 0.3s ease; }
+  .tabview.active { display: block; }
+  @keyframes fadein { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  .card {
+    background: linear-gradient(150deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    border: 1px solid var(--ipl-card-border);
+    border-radius: 16px;
+    padding: 20px 22px;
+    margin-bottom: 18px;
+  }
+  .card h3 { margin: 0 0 14px; font-size: 1.05rem; font-weight: 800; letter-spacing: -0.01em; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+  label { display: block; color: var(--ipl-muted); font-size: 0.82rem; font-weight: 600; margin: 0 0 6px; }
+  select, input[type="number"], input[type="text"], input[type="search"] {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--ipl-card-border);
+    border-radius: 10px;
+    color: var(--ipl-text);
+    padding: 10px 12px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    margin-bottom: 14px;
+    outline: none;
+  }
+  select:focus, input:focus { border-color: var(--ipl-purple-light); }
+  select option { background: #131737; color: var(--ipl-text); }
+
+  .search-wrap { position: relative; margin-bottom: 14px; }
+  .search-wrap select { display: none; }
+  .search-input {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--ipl-card-border);
+    border-radius: 10px;
+    color: var(--ipl-text);
+    padding: 10px 12px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    margin-bottom: 0;
+    outline: none;
+    cursor: text;
+  }
+  .search-input:focus { border-color: var(--ipl-purple-light); }
+  .search-input::placeholder { color: var(--ipl-muted); }
+  .search-drop {
+    position: absolute;
+    top: calc(100% - 8px);
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: #1b2050;
+    border: 1px solid var(--ipl-card-border);
+    border-radius: 10px;
+    max-height: 240px;
+    overflow-y: auto;
+    box-shadow: 0 12px 30px -10px rgba(0,0,0,0.6);
+    display: none;
+  }
+  .search-drop.open { display: block; }
+  .search-item { padding: 9px 12px; cursor: pointer; color: var(--ipl-text); font-size: 0.9rem; }
+  .search-item:hover, .search-item.hl { background: rgba(139,92,246,0.25); }
+  .search-empty { padding: 9px 12px; color: var(--ipl-muted); font-size: 0.9rem; }
+
+  .btn {
+    background: linear-gradient(135deg, var(--ipl-purple), var(--ipl-purple-light));
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 11px 26px;
+    font-family: inherit;
+    font-size: 0.98rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+    position: relative;
+  }
+  .btn:hover { transform: translateY(-1px); box-shadow: 0 10px 30px -10px rgba(139,92,246,0.7); }
+  .btn:active { transform: none; }
+  .btn:disabled { opacity: 0.6; cursor: wait; transform: none; box-shadow: none; }
+  .btn .spinner {
+    display: none; width: 15px; height: 15px; margin-right: 8px;
+    border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff;
+    border-radius: 50%; vertical-align: middle;
+    animation: spin 0.7s linear infinite;
+  }
+  .btn.loading .spinner { display: inline-block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .winner-card {
+    background: linear-gradient(135deg, rgba(109,40,217,0.85), rgba(139,92,246,0.55));
+    border-radius: 18px;
+    padding: 26px 28px;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 14px 40px -14px rgba(109,40,217,0.8);
+  }
+  .winner-card .win-label { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em; opacity: 0.85; }
+  .winner-card .win-team { font-size: 1.7rem; font-weight: 900; margin: 8px 0 2px; }
+  .winner-card .win-sub { font-size: 0.9rem; opacity: 0.9; }
+
+  .score-card {
+    background: linear-gradient(135deg, rgba(245,176,4,0.85), rgba(255,210,74,0.55));
+    border-radius: 18px;
+    padding: 26px 28px;
+    color: #3a2c00;
+    text-align: center;
+    box-shadow: 0 14px 40px -14px rgba(245,176,4,0.7);
+  }
+  .score-card .score-label { font-size: 0.82rem; font-weight: 800; letter-spacing: 0.1em; opacity: 0.85; }
+  .score-card .score-range { font-size: 2rem; font-weight: 900; margin: 6px 0; }
+  .score-card .score-avg { font-size: 0.9rem; opacity: 0.85; }
+
+  .champ-card {
+    background: linear-gradient(135deg, rgba(109,40,217,0.85), rgba(245,176,4,0.6));
+    border-radius: 18px;
+    padding: 26px 28px;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 14px 40px -14px rgba(109,40,217,0.8);
+  }
+  .champ-card .win-label { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em; opacity: 0.85; }
+  .champ-card .win-team { font-size: 1.7rem; font-weight: 900; margin: 8px 0 2px; }
+  .champ-card .win-sub { font-size: 0.9rem; opacity: 0.9; }
+
+  .prob-row { display: flex; align-items: center; margin: 10px 0; gap: 12px; }
+  .prob-team { min-width: 200px; font-weight: 700; font-size: 0.95rem; text-align: right; }
+  .prob-track { flex: 1; height: 26px; background: rgba(255,255,255,0.06); border-radius: 999px; overflow: hidden; position: relative; }
+  .prob-fill {
+    height: 100%; border-radius: 999px; display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 10px; font-weight: 800; font-size: 0.85rem; color: #fff; min-width: 44px;
+    transition: width 0.5s ease;
+  }
+  .prob-fill.p1 { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+  .prob-fill.p2 { background: linear-gradient(90deg, #d97706, #f5b004); }
+
+  .explain-row { display: flex; align-items: center; margin: 8px 0; gap: 12px; }
+  .explain-label { min-width: 150px; font-size: 0.85rem; font-weight: 600; text-align: right; }
+  .explain-track { flex: 1; height: 18px; background: rgba(255,255,255,0.06); border-radius: 999px; overflow: hidden; position: relative; }
+  .explain-fill { height: 100%; border-radius: 999px; transition: width 0.5s ease; }
+  .explain-fill.e1 { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+  .explain-fill.e2 { background: linear-gradient(90deg, #d97706, #f5b004); }
+  .explain-val { min-width: 130px; font-size: 0.85rem; font-weight: 700; }
+
+  .stat-note {
+    background: rgba(245,176,4,0.12);
+    border: 1px solid rgba(245,176,4,0.35);
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-size: 0.85rem;
+    color: var(--ipl-gold-light);
+    margin-top: 14px;
+  }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  thead th {
+    text-align: left; color: var(--ipl-muted); font-weight: 600; font-size: 0.78rem;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 10px 12px; border-bottom: 1px solid var(--ipl-card-border);
+  }
+  tbody td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  tbody tr:hover { background: rgba(255,255,255,0.03); }
+  .table-scroll { overflow-x: auto; }
+
+  .chart-box { position: relative; height: 380px; }
+  .chart-box.small { height: 300px; }
+
+  .metric-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 16px 0; }
+  .metric {
+    background: linear-gradient(150deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
+    border: 1px solid var(--ipl-card-border);
+    border-radius: 14px;
+    padding: 14px 16px;
+  }
+  .metric .m-label { color: var(--ipl-muted); font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  .metric .m-value { font-size: 1.5rem; font-weight: 800; margin-top: 3px; }
+
+  .empty, .error { padding: 16px; border-radius: 12px; font-size: 0.9rem; }
+  .error { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.4); color: #fca5a5; }
+
+  .form-chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 16px; }
+  .fchip {
+    width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 0.85rem;
+  }
+  .fchip.win { background: rgba(34,197,94,0.22); color: var(--ipl-green); border: 1px solid rgba(34,197,94,0.45); }
+  .fchip.loss { background: rgba(239,68,68,0.18); color: var(--ipl-red); border: 1px solid rgba(239,68,68,0.45); }
+
+  .candidate { display: inline-block; background: rgba(255,255,255,0.06); border: 1px solid var(--ipl-card-border); color: var(--ipl-text); border-radius: 999px; padding: 6px 16px; margin: 4px; font-family: inherit; font-size: 0.88rem; cursor: pointer; }
+  .candidate:hover { border-color: var(--ipl-purple-light); }
+
+  #toasts { position: fixed; top: 18px; right: 18px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; max-width: 360px; }
+  .toast {
+    padding: 12px 16px; border-radius: 12px; font-size: 0.9rem; font-weight: 600;
+    box-shadow: 0 12px 34px -10px rgba(0,0,0,0.6); animation: toastin 0.25s ease;
+  }
+  .toast.error { background: rgba(127,29,29,0.95); border: 1px solid rgba(239,68,68,0.6); color: #fecaca; }
+  .toast.success { background: rgba(20,83,45,0.95); border: 1px solid rgba(34,197,94,0.6); color: #bbf7d0; }
+  .toast.info { background: rgba(30,27,75,0.95); border: 1px solid rgba(139,92,246,0.6); color: #ddd6fe; }
+  @keyframes toastin { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
+
+  footer { margin-top: 34px; color: var(--ipl-muted); font-size: 0.82rem; text-align: center; }
+
+  @media (max-width: 900px) {
+    .kpis, .grid2, .grid3, .grid4, .metric-cards { grid-template-columns: 1fr; }
+    .prob-team { min-width: 110px; font-size: 0.85rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>IPL Match Prediction System</h1>
+    <p>Analytics-driven pre-match and live win probabilities, first-innings score forecasts, season reviews and player insights.</p>
+    <div class="chips" id="heroChips"></div>
+  </div>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="tab-match">Match Prediction</button>
+    <button class="tab" data-tab="tab-team">Team Comparison</button>
+    <button class="tab" data-tab="tab-player">Player Analytics</button>
+    <button class="tab" data-tab="tab-venue">Venue Analytics</button>
+    <button class="tab" data-tab="tab-season">Season Review</button>
+    <button class="tab" data-tab="tab-tracker">In-Play Tracker</button>
+    <button class="tab" data-tab="tab-sim">Simulator</button>
+    <button class="tab" data-tab="tab-models">Model Insights</button>
+  </div>
+
+  <!-- ======================= MATCH PREDICTION ======================= -->
+  <section id="tab-match" class="tabview active">
+    <div class="card">
+      <h3>Pre-Match Prediction</h3>
+      <div class="grid2">
+        <div>
+          <label for="team1">Team 1</label>
+          <select id="team1"></select>
+          <label for="team2">Team 2</label>
+          <select id="team2"></select>
+          <label for="venue">Venue</label>
+          <select id="venue"></select>
+        </div>
+        <div>
+          <label for="matchSeason">Season Context (for team form stats)</label>
+          <select id="matchSeason"></select>
+          <label for="tossWinner">Toss Winner</label>
+          <select id="tossWinner"></select>
+          <label for="tossDecision">Toss Decision</label>
+          <select id="tossDecision"><option value="bat">Bat first</option><option value="field">Field first</option></select>
+          <label for="battingFirst">First Innings Batting Team</label>
+          <select id="battingFirst"></select>
+        </div>
+      </div>
+      <button class="btn" id="btnPredict"><span class="spinner"></span>Predict Match</button>
+    </div>
+
+    <div id="matchResults" class="grid2" style="display:none;">
+      <div class="winner-card" id="winnerCard"></div>
+      <div class="score-card" id="scoreCard"></div>
+    </div>
+
+    <div id="probArea" style="display:none;">
+      <div class="card">
+        <h3>Win Probability Breakdown</h3>
+        <div id="probBars"></div>
+      </div>
+    </div>
+
+    <div id="explainCard" class="card" style="display:none;">
+      <h3>What Drives This Prediction?</h3>
+      <div id="explainFactors"></div>
+      <div class="stat-note" id="explainNote"></div>
+    </div>
+
+    <div class="grid2">
+      <div class="card" id="h2hCard" style="display:none;">
+        <h3>Head-to-Head</h3>
+        <div class="table-scroll" id="h2hTable"></div>
+      </div>
+      <div class="card" id="watchCard" style="display:none;">
+        <h3>Players to Watch</h3>
+        <div class="table-scroll" id="watchTable"></div>
+      </div>
+    </div>
+
+    <div class="stat-note" style="display:none;" id="honestNote">Pre-match T20 outcomes are genuinely near-coin-flip; the model is trained with chronological validation so confidence bands stay honest.</div>
+
+    <div class="card" style="margin-top:18px;">
+      <h3>Live Chase Win Predictor</h3>
+      <div class="grid4">
+        <div>
+          <label for="chasingTeam">Chasing Team</label>
+          <select id="chasingTeam"></select>
+        </div>
+        <div>
+          <label for="target">Target</label>
+          <input type="number" id="target" min="1" max="300" value="180">
+        </div>
+        <div>
+          <label for="currentScore">Current Score</label>
+          <input type="number" id="currentScore" min="0" max="300" value="60">
+        </div>
+        <div>
+          <label for="runsNeeded">Runs Needed</label>
+          <input type="number" id="runsNeeded" min="0" max="300" value="120">
+        </div>
+        <div>
+          <label for="ballsRemaining">Balls Remaining</label>
+          <input type="number" id="ballsRemaining" min="0" max="120" value="60">
+        </div>
+        <div>
+          <label for="wicketsRemaining">Wickets Remaining</label>
+          <input type="number" id="wicketsRemaining" min="0" max="10" value="6">
+        </div>
+        <div style="align-self:end;">
+          <button class="btn" id="btnLive"><span class="spinner"></span>Predict Chase</button>
+        </div>
+      </div>
+      <div class="metric-cards" id="liveMetrics" style="display:none;"></div>
+      <div id="liveBars" style="display:none;"></div>
+    </div>
+  </section>
+
+  <!-- ======================= TEAM COMPARISON ======================= -->
+  <section id="tab-team" class="tabview">
+    <div class="card">
+      <div class="grid2">
+        <div><label for="teamA">Team A</label><select id="teamA"></select></div>
+        <div><label for="teamB">Team B</label><select id="teamB"></select></div>
+      </div>
+      <button class="btn" id="btnCompare"><span class="spinner"></span>Compare Teams</button>
+    </div>
+    <div class="grid2">
+      <div class="card" id="h2hSummaryCard" style="display:none;">
+        <h3>Head-to-Head Record</h3>
+        <div class="table-scroll" id="h2hSummaryTable"></div>
+      </div>
+      <div class="card" style="display:none;" id="h2hChartCard">
+        <h3>Win Distribution</h3>
+        <div class="chart-box small"><canvas id="h2hChart"></canvas></div>
+      </div>
+    </div>
+    <div class="card" id="h2hTopCard" style="display:none;">
+      <h3>Head-to-Head Top Performers</h3>
+      <div class="table-scroll" id="h2hTopTable"></div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Overall Team Records</h3>
+        <div class="table-scroll" id="teamRecordsTable"></div>
+      </div>
+      <div class="card">
+        <h3>Recent Form</h3>
+        <label for="teamFormSelect">Team</label>
+        <select id="teamFormSelect"></select>
+        <div id="teamFormChips"></div>
+        <div class="table-scroll" id="teamFormTable"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Toss Impact Analysis</h3>
+      <div class="metric-cards">
+        <div class="metric"><div class="m-label">Overall Toss Win Rate</div><div class="m-value" id="tossOverall">—</div></div>
+        <div class="metric"><div class="m-label">Toss → Match Win</div><div class="m-value" id="tossToWin">—</div></div>
+      </div>
+      <div class="table-scroll" id="tossTable"></div>
+    </div>
+  </section>
+
+  <!-- ======================= PLAYER ANALYTICS ======================= -->
+  <section id="tab-player" class="tabview">
+    <div class="card">
+      <div class="grid2">
+        <div>
+          <label for="playerSeason">Season</label>
+          <select id="playerSeason"></select>
+        </div>
+        <div>
+          <label for="playerSearch">Player Profile Search</label>
+          <div style="display:flex; gap:10px; align-items:flex-start;">
+            <input type="search" id="playerSearch" placeholder="e.g. V Kohli, MS Dhoni..." style="margin-bottom:0;">
+            <button class="btn" id="btnPlayerSearch" style="white-space:nowrap;"><span class="spinner"></span>Search</button>
+          </div>
+          <div id="playerCandidates" style="margin-top:8px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="playerProfile" style="display:none;">
+      <div class="card">
+        <h3 id="profileTitle">Career Profile</h3>
+        <div class="metric-cards" id="profileMetrics"></div>
+        <div class="grid2">
+          <div class="card" style="margin:0;">
+            <h3>Best Season</h3>
+            <div class="metric-cards" id="bestSeasonMetrics" style="grid-template-columns: repeat(3, 1fr);"></div>
+          </div>
+          <div class="card" style="margin:0;">
+            <h3>Season-by-Season</h3>
+            <div class="table-scroll" id="playerSeasonsTable"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Top Fantasy Scorers</h3>
+      <div class="table-scroll" id="topFantasyTable"></div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Best Batsmen</h3>
+        <div class="table-scroll" id="bestBatsmenTable"></div>
+      </div>
+      <div class="card">
+        <h3>Best Bowlers</h3>
+        <div class="table-scroll" id="bestBowlersTable"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Strike Rate vs Batting Average</h3>
+      <div class="chart-box"><canvas id="battingScatter"></canvas></div>
+    </div>
+  </section>
+
+  <!-- ======================= VENUE ANALYTICS ======================= -->
+  <section id="tab-venue" class="tabview">
+    <div class="grid2">
+      <div class="card">
+        <h3>Highest Scoring Venues</h3>
+        <div class="chart-box small"><canvas id="venueScoreChart"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Chase vs Defend Success (Top Venues)</h3>
+        <div class="chart-box small"><canvas id="venueCdChart"></canvas></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Venue Statistics</h3>
+      <div class="table-scroll" id="venueTable"></div>
+    </div>
+  </section>
+
+  <!-- ======================= SEASON REVIEW ======================= -->
+  <section id="tab-season" class="tabview">
+    <div class="card">
+      <div class="grid2">
+        <div style="max-width:280px;">
+          <label for="reviewSeason">Season</label>
+          <select id="reviewSeason"></select>
+        </div>
+        <div class="stat-note" style="margin:auto 0;">Champions and honours per season, built entirely from verified IPL records.</div>
+      </div>
+    </div>
+    <div id="reviewCards" style="display:none;">
+      <div class="grid3">
+        <div class="champ-card" id="championCard"></div>
+        <div class="winner-card" id="runnerUpCard"></div>
+        <div class="score-card" id="highestCard"></div>
+      </div>
+      <div class="grid2">
+        <div class="card">
+          <h3>Top Batsman</h3>
+          <div id="topBatsmanCard" class="metric-cards" style="grid-template-columns: repeat(2, 1fr);"></div>
+        </div>
+        <div class="card">
+          <h3>Top Bowler</h3>
+          <div id="topBowlerCard" class="metric-cards" style="grid-template-columns: repeat(2, 1fr);"></div>
+        </div>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Champions by Season</h3>
+        <div class="chart-box"><canvas id="championChart"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Season Honour Roll</h3>
+        <div class="table-scroll" id="seasonHistoryTable"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= IN-PLAY TRACKER ======================= -->
+  <section id="tab-tracker" class="tabview">
+    <div class="card">
+      <h3>In-Play Chase Win Tracker</h3>
+      <p class="stat-note">Recomputes chase win probability at every over boundary from the live state set in Match Prediction → Live Chase Predictor. The feed is a stub (states linearly interpolated from the current score) to demonstrate the tracker; replace it with a real over-by-over feed when available. Stub states are not real match data.</p>
+      <button class="btn" id="btnTracker"><span class="spinner"></span>Build Over-by-Over Curve</button>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Chase Win % by Over</h3>
+        <div class="chart-box"><canvas id="trackerChart"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Over-by-Over States</h3>
+        <div class="table-scroll" id="trackerTable"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= SIMULATOR ======================= -->
+  <section id="tab-sim" class="tabview">
+    <div class="card">
+      <h3>Monte Carlo Match Simulator</h3>
+      <p class="stat-note">Uses the teams, venue, toss and season set in Match Prediction. Scores are sampled from the model's predictive distribution (Laplace, scale = the model's real MAE on held-out matches), never synthetic data. Chase outcomes are simulated with the live model across those targets.</p>
+      <div class="grid2">
+        <div>
+          <label for="simSims">Simulations</label>
+          <input type="number" id="simSims" min="100" max="5000" step="100" value="2000">
+        </div>
+        <div style="align-self:end;">
+          <button class="btn" id="btnSim"><span class="spinner"></span>Run Simulation</button>
+        </div>
+      </div>
+    </div>
+    <div class="metric-cards" id="simKpis" style="display:none;"></div>
+    <div class="grid2">
+      <div class="card">
+        <h3>First-Innings Score Distribution</h3>
+        <div class="chart-box"><canvas id="simScoreChart"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Win Probability (with 95% CI)</h3>
+        <div id="simProbBars"></div>
+        <div class="stat-note" id="simNote"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= MODEL INSIGHTS ======================= -->
+  <section id="tab-models" class="tabview">
+    <div id="modelGroups"></div>
+    <div class="card">
+      <h3>Top Winning Factors (XGBoost)</h3>
+      <div class="chart-box"><canvas id="fiChart"></canvas></div>
+    </div>
+    <div class="stat-note">Metrics use both a random 80/20 split (generalisation) and a chronological split (train on past, predict future). Chronological numbers are the honest estimate of real forward-looking performance.</div>
+  </section>
+
+  <footer>Source: data/raw/matches.csv + data/raw/deliveries.csv · trained exclusively on verified IPL data</footer>
+</div>
+
+<div id="toasts"></div>
+
+<script>
+const state = { meta: null };
+let charts = {};
+
+async function apiGet(url) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error((await res.text()) || res.statusText);
+  return res.json();
+}
+async function apiPost(url, body) {
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) throw new Error((await res.text()) || res.statusText);
+  return res.json();
+}
+
+function el(id) { return document.getElementById(id); }
+
+function toast(msg, type = "error", ms = 4200) {
+  const box = el("toasts");
+  const t = document.createElement("div");
+  t.className = "toast " + type;
+  t.textContent = msg;
+  box.appendChild(t);
+  setTimeout(() => { t.style.opacity = "0"; t.style.transition = "opacity 0.3s"; }, ms);
+  setTimeout(() => t.remove(), ms + 350);
+}
+
+function setLoading(btnId, loading) {
+  const btn = el(btnId);
+  if (!btn) return;
+  btn.classList.toggle("loading", loading);
+  btn.disabled = loading;
+}
+
+function fillSelect(id, options, value) {
+  const sel = el(id);
+  sel.innerHTML = options.map((o) => `<option value="${o}">${o}</option>`).join("");
+  if (value && options.includes(value)) sel.value = value;
+  const wrap = sel.closest(".search-wrap");
+  if (wrap) {
+    const input = wrap.querySelector(".search-input");
+    if (input) input.value = sel.value || "";
+    renderDrop(wrap, "");
+  }
+}
+
+function renderDrop(wrap, query) {
+  const select = wrap.querySelector("select");
+  const drop = wrap.querySelector(".search-drop");
+  if (!select || !drop) return;
+  const q = query.trim().toLowerCase();
+  const opts = Array.from(select.options).filter((o) => !q || o.text.toLowerCase().includes(q));
+  if (!opts.length) {
+    drop.innerHTML = '<div class="search-empty">No matches.</div>';
+    return;
+  }
+  drop.innerHTML = opts
+    .map((o, i) => `<div class="search-item${i === 0 ? " hl" : ""}" data-v="${o.value.replace(/"/g, "&quot;")}">${o.text}</div>`)
+    .join("");
+}
+
+function highlightItem(wrap, idx) {
+  const items = wrap.querySelectorAll(".search-item");
+  items.forEach((it, i) => it.classList.toggle("hl", i === idx));
+  const it = items[idx];
+  if (it) it.scrollIntoView({ block: "nearest" });
+}
+
+function pickItem(wrap, item) {
+  const sel = wrap.querySelector("select");
+  sel.value = item.getAttribute("data-v");
+  wrap.querySelector(".search-input").value = sel.value || "";
+  wrap.querySelector(".search-drop").classList.remove("open");
+  sel.dispatchEvent(new Event("change"));
+}
+
+function makeSearchable(id) {
+  const sel = el(id);
+  if (!sel || sel.closest(".search-wrap")) return;
+  const wrap = document.createElement("div");
+  wrap.className = "search-wrap";
+  const input = document.createElement("input");
+  input.type = "text";
+  input.className = "search-input";
+  input.autocomplete = "off";
+  input.spellcheck = false;
+  input.placeholder = "Search & select…";
+  input.value = sel.value || "";
+  const drop = document.createElement("div");
+  drop.className = "search-drop";
+  wrap.appendChild(input);
+  wrap.appendChild(drop);
+  sel.parentNode.insertBefore(wrap, sel);
+  wrap.appendChild(sel);
+
+  let hlIdx = 0;
+  input.addEventListener("input", () => {
+    renderDrop(wrap, input.value);
+    drop.classList.add("open");
+    hlIdx = 0;
+    highlightItem(wrap, hlIdx);
+  });
+  input.addEventListener("focus", () => {
+    renderDrop(wrap, "");
+    drop.classList.add("open");
+    hlIdx = 0;
+    highlightItem(wrap, hlIdx);
+  });
+  input.addEventListener("click", (e) => e.stopPropagation());
+  drop.addEventListener("mousedown", (e) => e.preventDefault());
+  drop.addEventListener("click", (e) => {
+    const item = e.target.closest(".search-item");
+    if (item) pickItem(wrap, item);
+  });
+  input.addEventListener("keydown", (e) => {
+    const items = drop.querySelectorAll(".search-item");
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault();
+      hlIdx = e.key === "ArrowDown" ? Math.min(items.length - 1, hlIdx + 1) : Math.max(0, hlIdx - 1);
+      highlightItem(wrap, hlIdx);
+    } else if (e.key === "Enter") {
+      const it = drop.querySelector(".search-item.hl");
+      if (it) {
+        pickItem(wrap, it);
+        e.preventDefault();
+      }
+    } else if (e.key === "Escape") {
+      drop.classList.remove("open");
+    }
+  });
+  document.addEventListener("click", (e) => {
+    if (!wrap.contains(e.target)) drop.classList.remove("open");
+  });
+}
+
+function renderTable(containerId, data) {
+  const host = el(containerId);
+  if (!data || !data.columns || !data.rows || data.rows.length === 0) {
+    host.innerHTML = '<div class="empty">No data available.</div>';
+    return;
+  }
+  const head = data.columns.map((c) => `<th>${c.replace(/_/g, " ")}</th>`).join("");
+  const body = data.rows
+    .map((r) => `<tr>${r.map((c) => `<td>${c === null || c === undefined || Number.isNaN(c) ? "—" : c}</td>`).join("")}</tr>`)
+    .join("");
+  host.innerHTML = `<table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>`;
+}
+
+function probBar(label, prob, cls) {
+  const p = Math.max(0, Math.min(100, prob));
+  return `<div class="prob-row"><div class="prob-team">${label}</div><div class="prob-track"><div class="prob-fill ${cls}" style="width:${p.toFixed(1)}%">${p.toFixed(1)}%</div></div></div>`;
+}
+
+function probBarCI(label, prob, lo, hi, cls) {
+  const p = Math.max(0, Math.min(100, prob));
+  return `<div class="prob-row"><div class="prob-team">${label}</div><div class="prob-track"><div class="prob-fill ${cls}" style="width:${p.toFixed(1)}%">${p.toFixed(1)}%</div></div></div>` +
+    `<div class="stat-note" style="margin:2px 0 10px;">95% CI: ${lo.toFixed(1)}% – ${hi.toFixed(1)}%</div>`;
+}
+
+function destroyChart(key) { if (charts[key]) { charts[key].destroy(); delete charts[key]; } }
+
+const chartColors = { purple: "#8b5cf6", gold: "#f5b004", blue: "#38bdf8", green: "#22c55e" };
+const gridColor = "rgba(255,255,255,0.06)";
+const textColor = "#e6e9ff";
+const muted = "#8b90b5";
+
+function baseChart(key, canvasId, cfg) {
+  destroyChart(key);
+  charts[key] = new Chart(el(canvasId), cfg);
+}
+
+// ---------------- TABS ----------------
+document.querySelectorAll(".tab").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach((b) => b.classList.remove("active"));
+    document.querySelectorAll(".tabview").forEach((v) => v.classList.remove("active"));
+    btn.classList.add("active");
+    el(btn.dataset.tab).classList.add("active");
+  });
+});
+
+// ---------------- INIT ----------------
+async function init() {
+  try {
+    state.meta = await apiGet("/api/meta");
+  } catch (e) {
+    document.querySelector(".hero p").textContent = "Failed to load data: " + e.message;
+    toast("Failed to load data: " + e.message, "error");
+    return;
+  }
+  const m = state.meta;
+  el("heroChips").innerHTML = [
+    `<span class="chip">${m.seasons} seasons</span>`,
+    `<span class="chip">${m.matches.toLocaleString()} matches</span>`,
+    `<span class="chip">${m.deliveries.toLocaleString()} deliveries</span>`,
+    `<span class="chip">XGBoost · LightGBM · CatBoost · Random Forest</span>`,
+  ].join("");
+
+  el("kpis").innerHTML = `
+    <div class="kpi"><div class="label">Seasons Covered</div><div class="value">${m.seasons}</div><div class="sub">2008 → ${m.current_season}</div></div>
+    <div class="kpi"><div class="label">Matches Analysed</div><div class="value">${m.matches.toLocaleString()}</div><div class="sub">Every completed IPL fixture</div></div>
+    <div class="kpi"><div class="label">Ball-by-Ball Records</div><div class="value">${m.deliveries.toLocaleString()}</div><div class="sub">Full delivery-level detail</div></div>
+    <div class="kpi"><div class="label">Winner Model (Chrono AUC)</div><div class="value">${(m.winner_chrono_auc ?? 0).toFixed(2)}</div><div class="sub">Train-on-past · test-on-future</div></div>`;
+
+  const seasonsArr = m.seasons_list.map(String);
+  fillSelect("team1", m.teams, "Mumbai Indians");
+  fillSelect("team2", m.teams.filter((t) => t !== "Mumbai Indians"), "Chennai Super Kings");
+  fillSelect("venue", m.venues);
+  fillSelect("matchSeason", seasonsArr, String(m.current_season));
+  fillSelect("chasingTeam", m.teams, "Mumbai Indians");
+  fillSelect("teamA", m.teams);
+  fillSelect("teamB", m.teams.filter((t) => t !== m.teams[0]));
+  fillSelect("teamFormSelect", m.teams, m.teams[0]);
+  fillSelect("playerSeason", seasonsArr, String(m.current_season));
+
+  syncTeamSelects();
+  loadTeamRecords();
+  loadVenues();
+  loadModels();
+  loadPlayerSeason();
+  loadTeamForm();
+  loadToss();
+  loadSeasonHistory();
+
+  el("team1").addEventListener("change", syncTeamSelects);
+  el("team2").addEventListener("change", syncTeamSelects);
+  el("teamA").addEventListener("change", () => {
+    fillSelect("teamB", state.meta.teams.filter((t) => t !== el("teamA").value));
+  });
+  el("teamFormSelect").addEventListener("change", loadTeamForm);
+  el("playerSeason").addEventListener("change", loadPlayerSeason);
+  el("reviewSeason").addEventListener("change", loadSeasonReview);
+  el("playerSearch").addEventListener("keydown", (e) => { if (e.key === "Enter") loadPlayerProfile(); });
+  el("btnPlayerSearch").addEventListener("click", loadPlayerProfile);
+
+  ["team1", "team2", "venue", "teamA", "teamB", "teamFormSelect"].forEach(makeSearchable);
+}
+
+function syncTeamSelects() {
+  const t1 = el("team1").value;
+  fillSelect("team2", state.meta.teams.filter((t) => t !== t1));
+  fillSelect("tossWinner", [t1, el("team2").value], t1);
+  fillSelect("battingFirst", [t1, el("team2").value], t1);
+  fillSelect("chasingTeam", [t1, el("team2").value], t1);
+}
+
+// ---------------- MATCH PREDICTION ----------------
+el("btnPredict").addEventListener("click", async () => {
+  const t1 = el("team1").value, t2 = el("team2").value;
+  const season = parseInt(el("matchSeason").value, 10);
+  const body = {
+    team1: t1, team2: t2,
+    venue: el("venue").value,
+    toss_winner: el("tossWinner").value,
+    toss_decision: el("tossDecision").value,
+    season,
+  };
+  const scoreBody = {
+    batting_team: el("battingFirst").value,
+    bowling_team: t1 === el("battingFirst").value ? t2 : t1,
+    venue: el("venue").value,
+    toss_winner: el("tossWinner").value,
+    toss_decision: el("tossDecision").value,
+    season,
+  };
+  setLoading("btnPredict", true);
+  try {
+    const [m, s, h2h, watch, explain] = await Promise.all([
+      apiPost("/api/predict/match", body),
+      apiPost("/api/predict/score", scoreBody),
+      apiPost("/api/teams/h2h", { team_a: t1, team_b: t2 }),
+      apiPost("/api/players/watch", { team1: t1, team2: t2, venue: el("venue").value }),
+      apiPost("/api/predict/explain", body),
+    ]);
+
+    el("winnerCard").innerHTML =
+      `<div class="win-label">PREDICTED WINNER · ${s.season}</div><div class="win-team">${m.winner}</div><div class="win-sub">${m.confidence.toFixed(1)}% model confidence</div>`;
+    el("scoreCard").innerHTML =
+      `<div class="score-label">EXPECTED FIRST-INNINGS SCORE</div><div class="score-range">${s.low_score} – ${s.high_score}</div><div class="score-avg">point estimate ≈ ${s.expected_score} · ${s.batting_team} batting first</div>`;
+    el("matchResults").style.display = "grid";
+    el("probArea").style.display = "block";
+    el("probBars").innerHTML =
+      probBar(t1, m.team1_prob, "p1") + probBar(t2, m.team2_prob, "p2");
+
+    el("explainCard").style.display = "block";
+    el("explainFactors").innerHTML = explain.factors
+      .map((f) => {
+        const fav = f.favors === "team1" ? explain.team1 : f.favors === "team2" ? explain.team2 : "neutral";
+        const label = f.favors === "neutral" ? `${f.factor} (no edge)` : `${f.factor} → ${fav}`;
+        return `<div class="explain-row"><div class="explain-label" title="${f.description}">${label}</div>` +
+          `<div class="explain-track"><div class="explain-fill ${f.team1_contribution >= 0 ? "e1" : "e2"}" style="width:${Math.min(100, Math.abs(f.team1_contribution) * 4)}%"></div></div>` +
+          `<div class="explain-val">${f.team1_contribution >= 0 ? "+" : ""}${f.team1_contribution.toFixed(1)}% ${f.team1_contribution >= 0 ? "for " + explain.team1 : "for " + explain.team2}</div></div>`;
+      })
+      .join("");
+    el("explainNote").textContent = explain.note;
+
+    el("h2hCard").style.display = "block";
+    if (h2h.summary) renderTable("h2hTable", h2h.summary);
+    else el("h2hTable").innerHTML = '<div class="empty">No direct head-to-head history found for this pairing.</div>';
+
+    el("watchCard").style.display = "block";
+    renderTable("watchTable", watch);
+
+    el("honestNote").style.display = "block";
+  } catch (e) {
+    el("matchResults").style.display = "none";
+    el("probArea").style.display = "none";
+    toast("Prediction failed: " + e.message, "error");
+  } finally {
+    setLoading("btnPredict", false);
+  }
+});
+
+function syncRunsNeeded() {
+  const target = parseInt(el("target").value, 10) || 0;
+  const score = parseInt(el("currentScore").value, 10) || 0;
+  el("runsNeeded").value = Math.max(0, target - score);
+}
+["target", "currentScore"].forEach((id) =>
+  el(id).addEventListener("input", syncRunsNeeded)
+);
+
+el("btnLive").addEventListener("click", async () => {
+  const t1 = el("team1").value, t2 = el("team2").value;
+  const chasing = el("chasingTeam").value;
+  const body = {
+    chasing_team: chasing,
+    defending_team: chasing === t1 ? t2 : t1,
+    venue: el("venue").value,
+    target: parseInt(el("target").value, 10),
+    current_score: parseInt(el("currentScore").value, 10),
+    runs_needed: parseInt(el("runsNeeded").value, 10),
+    balls_remaining: parseInt(el("ballsRemaining").value, 10),
+    wickets_remaining: parseInt(el("wicketsRemaining").value, 10),
+  };
+  setLoading("btnLive", true);
+  try {
+    const r = await apiPost("/api/predict/live", body);
+    el("liveMetrics").style.display = "grid";
+    el("liveMetrics").innerHTML = `
+      <div class="metric"><div class="m-label">${r.chasing_team} Chase Win</div><div class="m-value">${r.chase_prob.toFixed(1)}%</div></div>
+      <div class="metric"><div class="m-label">${r.defending_team} Defend Win</div><div class="m-value">${r.defend_prob.toFixed(1)}%</div></div>
+      <div class="metric"><div class="m-label">Current Score</div><div class="m-value">${r.current_score}/${r.wickets_lost}</div></div>
+      <div class="metric"><div class="m-label">Required RR</div><div class="m-value">${r.required_run_rate.toFixed(2)}</div></div>`;
+    el("liveBars").style.display = "block";
+    el("liveBars").innerHTML =
+      probBar(`${r.chasing_team} · chase`, r.chase_prob, "p1") +
+      probBar(`${r.defending_team} · defend`, r.defend_prob, "p2");
+  } catch (e) {
+    toast("Live prediction failed: " + e.message, "error");
+  } finally {
+    setLoading("btnLive", false);
+  }
+});
+
+// ---------------- IN-PLAY TRACKER ----------------
+el("btnTracker").addEventListener("click", async () => {
+  const t1 = el("team1").value, t2 = el("team2").value;
+  const chasing = el("chasingTeam").value;
+  const body = {
+    chasing_team: chasing,
+    defending_team: chasing === t1 ? t2 : t1,
+    venue: el("venue").value,
+    target: parseInt(el("target").value, 10),
+    current_score: parseInt(el("currentScore").value, 10),
+    balls_remaining: parseInt(el("ballsRemaining").value, 10),
+    wickets_remaining: parseInt(el("wicketsRemaining").value, 10),
+  };
+  setLoading("btnTracker", true);
+  try {
+    const r = await apiPost("/api/predict/tracker", body);
+    renderTable("trackerTable", {
+      columns: ["over", "score", "wickets_lost", "chase_prob", "defend_prob", "required_run_rate"],
+      rows: r.points.map((p) => [p.over, p.score, p.wickets_lost, p.chase_prob + "%", p.defend_prob + "%", p.required_run_rate]),
+    });
+    baseChart("tracker", "trackerChart", {
+      type: "line",
+      data: {
+        labels: r.points.map((p) => "Ov " + p.over),
+        datasets: [{
+          label: "Chase Win %",
+          data: r.points.map((p) => p.chase_prob),
+          borderColor: chartColors.gold,
+          backgroundColor: "rgba(245,176,4,0.15)",
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4,
+          pointBackgroundColor: chartColors.gold,
+        }],
+      },
+      options: {
+        ...chartOpts("Win %"),
+        scales: {
+          x: { ticks: { color: muted }, grid: { color: gridColor } },
+          y: { ticks: { color: muted }, grid: { color: gridColor }, min: 0, max: 100 },
+        },
+      },
+    });
+  } catch (e) {
+    toast("Tracker failed: " + e.message, "error");
+  } finally {
+    setLoading("btnTracker", false);
+  }
+});
+
+// ---------------- SIMULATOR ----------------
+el("btnSim").addEventListener("click", async () => {
+  const t1 = el("team1").value, t2 = el("team2").value;
+  const body = {
+    team1: t1,
+    team2: t2,
+    venue: el("venue").value,
+    toss_winner: el("tossWinner").value,
+    toss_decision: el("tossDecision").value,
+    batting_first: el("battingFirst").value,
+    season: parseInt(el("matchSeason").value, 10),
+    n_sims: parseInt(el("simSims").value, 10) || 2000,
+  };
+  setLoading("btnSim", true);
+  try {
+    const r = await apiPost("/api/simulate/match", body);
+    const sc = r.score;
+    el("simKpis").style.display = "grid";
+    el("simKpis").innerHTML = `
+      <div class="metric"><div class="m-label">Expected Score</div><div class="m-value">${sc.expected}</div><div class="m-sub">MAE ${sc.mae_used.toFixed(1)}</div></div>
+      <div class="metric"><div class="m-label">Median</div><div class="m-value">${sc.p50}</div></div>
+      <div class="metric"><div class="m-label">p5 – p95 Range</div><div class="m-value">${sc.p5} – ${sc.p95}</div></div>
+      <div class="metric"><div class="m-label">${r.chase.chaser} Chase Win</div><div class="m-value">${r.chase.win_pct.toFixed(1)}%</div><div class="m-sub">${r.chase.win_p5.toFixed(1)}% – ${r.chase.win_p95.toFixed(1)}% (p5–p95)</div></div>`;
+
+    baseChart("simScore", "simScoreChart", {
+      type: "bar",
+      data: {
+        labels: sc.histogram.map((h) => h.bucket),
+        datasets: [{
+          data: sc.histogram.map((h) => h.pct),
+          backgroundColor: "rgba(139,92,246,0.7)",
+          borderRadius: 6,
+        }],
+      },
+      options: { ...chartOpts("Share of sims (%)"), scales: { x: { ticks: { color: muted, maxRotation: 45 }, grid: { color: gridColor } }, y: { ticks: { color: muted }, grid: { color: gridColor } } } },
+    });
+
+    const w = r.winner;
+    el("simProbBars").innerHTML =
+      probBarCI(t1, w.team1_prob, w.team1_ci_low, w.team1_ci_high, "p1") +
+      probBarCI(t2, w.team2_prob, w.team2_ci_low, w.team2_ci_high, "p2");
+    el("simNote").textContent = r.note;
+  } catch (e) {
+    toast("Simulation failed: " + e.message, "error");
+  } finally {
+    setLoading("btnSim", false);
+  }
+});
+
+// ---------------- TEAM COMPARISON ----------------
+el("btnCompare").addEventListener("click", async () => {
+  const teamA = el("teamA").value, teamB = el("teamB").value;
+  setLoading("btnCompare", true);
+  try {
+    const r = await apiPost("/api/teams/h2h", { team_a: teamA, team_b: teamB });
+    el("h2hSummaryCard").style.display = "block";
+    el("h2hChartCard").style.display = "block";
+    if (r.summary) {
+      renderTable("h2hSummaryTable", r.summary);
+      const rows = r.summary.rows;
+      const labels = r.summary.columns.includes("winner") ? rows.map((x) => x[0]) : [teamA, teamB];
+      const data = r.summary.columns.includes("winner")
+        ? rows.map((x) => (isNaN(x[1]) ? 0 : x[1]))
+        : [rows[0] ? rows[0][2] : 0, rows[1] ? rows[1][2] : 0];
+      baseChart("h2h", "h2hChart", {
+        type: "bar",
+        data: {
+          labels,
+          datasets: [{ data, backgroundColor: [chartColors.purple, chartColors.gold], borderRadius: 8, maxBarThickness: 60 }],
+        },
+        options: chartOpts("Wins"),
+      });
+    } else {
+      el("h2hSummaryTable").innerHTML = '<div class="empty">These two teams have no head-to-head record in the dataset.</div>';
+      destroyChart("h2h");
+    }
+    el("h2hTopCard").style.display = "block";
+    if (r.top_performers) renderTable("h2hTopTable", r.top_performers);
+    else el("h2hTopTable").innerHTML = '<div class="empty">No head-to-head top performers.</div>';
+  } catch (e) {
+    toast("Comparison failed: " + e.message, "error");
+  } finally {
+    setLoading("btnCompare", false);
+  }
+});
+
+async function loadTeamRecords() {
+  try {
+    const r = await apiGet("/api/teams/records");
+    renderTable("teamRecordsTable", r);
+  } catch (e) { toast("Team records failed: " + e.message, "error"); }
+}
+
+async function loadTeamForm() {
+  const team = el("teamFormSelect").value;
+  if (!team) return;
+  try {
+    const r = await apiGet(`/api/teams/form?team=${encodeURIComponent(team)}&limit=10`);
+    renderTable("teamFormTable", r);
+    const results = r.rows.map((row) => row[r.columns.indexOf("result")]);
+    el("teamFormChips").innerHTML = results
+      .map((res) => `<div class="fchip ${String(res).toLowerCase().startsWith("w") ? "win" : "loss"}">${String(res).toLowerCase().startsWith("w") ? "W" : "L"}</div>`)
+      .join("") + `<span style="margin-left:10px;color:var(--ipl-muted);font-size:0.85rem;">${r.recent_wins}W · ${r.recent_played - r.recent_wins}L (last ${r.recent_played})</span>`;
+  } catch (e) { toast("Team form failed: " + e.message, "error"); }
+}
+
+async function loadToss() {
+  try {
+    const r = await apiGet("/api/toss");
+    renderTable("tossTable", r);
+    el("tossOverall").textContent = r.overall_toss_win_rate + "%";
+    el("tossToWin").textContent = r.overall_toss_to_match_win + "%";
+  } catch (e) { toast("Toss analysis failed: " + e.message, "error"); }
+}
+
+// ---------------- PLAYER ANALYTICS ----------------
+async function loadPlayerSeason() {
+  const season = el("playerSeason").value;
+  try {
+    const r = await apiGet(`/api/players/season?season=${season}`);
+    renderTable("topFantasyTable", r.top_fantasy);
+    renderTable("bestBatsmenTable", r.best_batsmen);
+    renderTable("bestBowlersTable", r.best_bowlers);
+    if (r.scatter && r.scatter.length) {
+      const points = r.scatter.map((p) => ({ x: p.strike_rate, y: p.batting_average, r: Math.min(10, Math.max(3, p.batting_runs / 60)), name: p.player, w: p.bowling_wickets }));
+      baseChart("scatter", "battingScatter", {
+        type: "bubble",
+        data: {
+          datasets: [{
+            data: points,
+            backgroundColor: points.map((p) => p.w > 10 ? "rgba(34,211,238,0.75)" : p.w > 5 ? "rgba(139,92,246,0.7)" : "rgba(245,176,4,0.7)"),
+            borderColor: "rgba(255,255,255,0.2)",
+          }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { label: (c) => `${c.raw.name}: SR ${c.raw.x.toFixed(1)}, Avg ${c.raw.y.toFixed(1)}` } },
+          },
+          scales: {
+            x: { title: { display: true, text: "Strike Rate", color: muted }, ticks: { color: muted }, grid: { color: gridColor } },
+            y: { title: { display: true, text: "Batting Average", color: muted }, ticks: { color: muted }, grid: { color: gridColor } },
+          },
+        },
+      });
+    } else {
+      destroyChart("scatter");
+    }
+  } catch (e) { toast("Player season data failed: " + e.message, "error"); }
+}
+
+async function loadPlayerProfile() {
+  const name = el("playerSearch").value.trim();
+  if (!name) { toast("Enter a player name to search.", "info"); return; }
+  setLoading("btnPlayerSearch", true);
+  try {
+    const r = await apiGet("/api/players/profile?name=" + encodeURIComponent(name));
+    el("playerCandidates").innerHTML = "";
+    if (!r.matched) {
+      el("playerProfile").style.display = "none";
+      if (r.candidates && r.candidates.length) {
+        el("playerCandidates").innerHTML = r.candidates
+          .map((c) => `<button class="candidate">${c}</button>`).join("");
+        el("playerCandidates").querySelectorAll(".candidate").forEach((btn) => {
+          btn.addEventListener("click", () => { el("playerSearch").value = btn.textContent; loadPlayerProfile(); });
+        });
+        toast(`No exact match. ${r.candidates.length} similar player(s) found.`, "info");
+      } else {
+        toast(`No player found matching "${r.query}".`, "error");
+      }
+      return;
+    }
+    const p = r.profile;
+    el("playerProfile").style.display = "block";
+    el("profileTitle").textContent = `${p.player} — Career Profile`;
+    el("profileMetrics").innerHTML = [
+      ["Seasons", p.seasons_played],
+      ["Matches", p.matches],
+      ["Runs", p.runs],
+      ["Batting Avg", p.average],
+      ["Strike Rate", p.strike_rate],
+      ["Wickets", p.wickets],
+      ["Economy", p.economy],
+      ["Fantasy Pts", p.fantasy_points],
+    ].map(([l, v]) => `<div class="metric"><div class="m-label">${l}</div><div class="m-value">${typeof v === "number" ? (Number.isInteger(v) ? v : v.toFixed(2)) : v}</div></div>`).join("");
+    const bs = p.best_season;
+    el("bestSeasonMetrics").innerHTML = [
+      ["Season", bs.season],
+      ["Runs", bs.runs],
+      ["Avg", bs.average],
+      ["SR", bs.strike_rate],
+      ["Wickets", bs.wickets],
+      ["Econ", bs.economy],
+    ].map(([l, v]) => `<div class="metric"><div class="m-label">${l}</div><div class="m-value">${v}</div></div>`).join("");
+    renderTable("playerSeasonsTable", r.seasons);
+  } catch (e) {
+    toast("Player profile failed: " + e.message, "error");
+  } finally {
+    setLoading("btnPlayerSearch", false);
+  }
+}
+
+// ---------------- VENUE ANALYTICS ----------------
+async function loadVenues() {
+  try {
+    const r = await apiGet("/api/venues");
+    renderTable("venueTable", r);
+
+    baseChart("venueScore", "venueScoreChart", {
+      type: "bar",
+      data: {
+        labels: r.highest_scoring.map((v) => v.venue),
+        datasets: [{
+          data: r.highest_scoring.map((v) => v.avg_first_innings_score),
+          backgroundColor: r.highest_scoring.map((_, i) => `rgba(139,92,246,${0.9 - i * 0.05})`),
+          borderRadius: 6,
+        }],
+      },
+      options: { indexAxis: "y", ...chartOpts("Avg First Innings Score") },
+    });
+
+    baseChart("venueCd", "venueCdChart", {
+      type: "bar",
+      data: {
+        labels: r.chase_defend.map((v) => v.venue),
+        datasets: [
+          { label: "Chase Win %", data: r.chase_defend.map((v) => v.chase_win_rate), backgroundColor: chartColors.purple, borderRadius: 6 },
+          { label: "Defend Win %", data: r.chase_defend.map((v) => v.defend_win_rate), backgroundColor: chartColors.gold, borderRadius: 6 },
+        ],
+      },
+      options: { ...chartOpts("Win Rate (%)"), scales: { x: { ticks: { color: muted, maxRotation: 45 }, grid: { color: gridColor } }, y: { ticks: { color: muted }, grid: { color: gridColor }, max: 100 } } },
+    });
+  } catch (e) { toast("Venue data failed: " + e.message, "error"); }
+}
+
+// ---------------- SEASON REVIEW ----------------
+async function loadSeasonHistory() {
+  try {
+    const r = await apiGet("/api/seasons/history");
+    state.seasonHistory = r;
+    const seasonsArr = r.rows.map((row) => String(row[0]));
+    fillSelect("reviewSeason", seasonsArr, String(state.meta.current_season));
+
+    const palette = ["#8b5cf6", "#f5b004", "#38bdf8", "#22c55e", "#ec4899", "#f97316", "#a78bfa", "#22d3ee"];
+    baseChart("champions", "championChart", {
+      type: "bar",
+      data: {
+        labels: r.rows.map((row) => String(row[0])),
+        datasets: [{
+          data: r.rows.map((row) => 1),
+          backgroundColor: r.rows.map((_, i) => palette[i % palette.length]),
+          borderRadius: 6,
+          maxBarThickness: 42,
+        }],
+      },
+      options: {
+        ...chartOpts(""),
+        plugins: {
+          ...chartOpts("").plugins,
+          tooltip: {
+            ...chartOpts("").plugins.tooltip,
+            callbacks: {
+              label: (ctx) => `Champion: ${r.rows[ctx.dataIndex][1]}`,
+            },
+          },
+        },
+        scales: {
+          x: { ticks: { color: muted }, grid: { color: gridColor } },
+          y: { display: false },
+        },
+      },
+    });
+
+    renderTable("seasonHistoryTable", r);
+    loadSeasonReview();
+  } catch (e) { toast("Season history failed: " + e.message, "error"); }
+}
+
+async function loadSeasonReview() {
+  const season = el("reviewSeason").value;
+  if (!season) return;
+  try {
+    const r = await apiGet(`/api/seasons/review?season=${season}`);
+    el("reviewCards").style.display = "block";
+    el("championCard").innerHTML =
+      `<div class="win-label">SEASON ${r.season} CHAMPIONS</div><div class="win-team">${r.champion || "No result"}</div><div class="win-sub">${r.matches} matches · final at ${r.final_venue || "—"}</div>`;
+    el("runnerUpCard").innerHTML =
+      `<div class="win-label">RUNNER-UP</div><div class="win-team">${r.runner_up || "—"}</div><div class="win-sub">Final loser</div>`;
+    el("highestCard").innerHTML =
+      `<div class="score-label">HIGHEST TEAM TOTAL</div><div class="score-range">${r.highest_total ? r.highest_total.score : "—"}</div><div class="score-avg">${r.highest_total ? r.highest_total.team + " · " + r.highest_total.venue : "—"}</div>`;
+    if (r.top_batsman) {
+      el("topBatsmanCard").innerHTML = [
+        ["Player", r.top_batsman.player],
+        ["Runs", r.top_batsman.runs],
+        ["Average", r.top_batsman.average],
+        ["Strike Rate", r.top_batsman.strike_rate],
+      ].map(([l, v]) => `<div class="metric"><div class="m-label">${l}</div><div class="m-value">${v}</div></div>`).join("");
+    } else {
+      el("topBatsmanCard").innerHTML = '<div class="empty">No data.</div>';
+    }
+    if (r.top_bowler) {
+      el("topBowlerCard").innerHTML = [
+        ["Player", r.top_bowler.player],
+        ["Wickets", r.top_bowler.wickets],
+        ["Economy", r.top_bowler.economy],
+        ["Role", "Bowler"],
+      ].map(([l, v]) => `<div class="metric"><div class="m-label">${l}</div><div class="m-value">${v}</div></div>`).join("");
+    } else {
+      el("topBowlerCard").innerHTML = '<div class="empty">No data.</div>';
+    }
+  } catch (e) { toast("Season review failed: " + e.message, "error"); }
+}
+
+// ---------------- MODEL INSIGHTS ----------------
+async function loadModels() {
+  try {
+    const r = await apiGet("/api/models");
+    const host = el("modelGroups");
+    host.innerHTML = "";
+    for (const [purpose, g] of Object.entries(r.groups)) {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `<h3>${g.title}</h3><div class="table-scroll"></div>`;
+      card.querySelector(".table-scroll").id = "model-" + purpose;
+      host.appendChild(card);
+      renderTable("model-" + purpose, g);
+    }
+    baseChart("fi", "fiChart", {
+      type: "bar",
+      data: {
+        labels: r.feature_importance.map((f) => f.feature),
+        datasets: [{
+          data: r.feature_importance.map((f) => f.importance),
+          backgroundColor: r.feature_importance.map((_, i) => `rgba(139,92,246,${1 - i * 0.05})`),
+          borderRadius: 6,
+        }],
+      },
+      options: { indexAxis: "y", ...chartOpts("Importance") },
+    });
+  } catch (e) { toast("Model insights failed: " + e.message, "error"); }
+}
+
+function chartOpts(yTitle) {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { labels: { color: textColor } },
+      tooltip: { backgroundColor: "#131737", titleColor: "#fff", bodyColor: textColor, borderColor: "rgba(255,255,255,0.1)", borderWidth: 1 },
+    },
+    scales: {
+      x: { ticks: { color: muted }, grid: { color: gridColor } },
+      y: { title: { display: !!yTitle, text: yTitle, color: muted }, ticks: { color: muted }, grid: { color: gridColor } },
+    },
+  };
+}
+
+init();
+</script>
+</body>
+</html>

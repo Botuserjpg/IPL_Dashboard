@@ -1,0 +1,46 @@
+bowling_team,phase,runs,balls,wickets,economy,wicket_frequency
+Chennai Super Kings,death,8036,5146,476,9.3696,0.0925
+Chennai Super Kings,middle,17920,14560,643,7.3846,0.0442
+Chennai Super Kings,powerplay,11251,8870,362,7.6106,0.0408
+Deccan Chargers,death,2764,1617,137,10.256,0.0847
+Deccan Chargers,middle,5626,4599,190,7.3399,0.0413
+Deccan Chargers,powerplay,3228,2823,119,6.8608,0.0422
+Delhi Capitals,death,8851,5465,483,9.7175,0.0884
+Delhi Capitals,middle,19354,15103,656,7.6888,0.0434
+Delhi Capitals,powerplay,11920,9373,359,7.6304,0.0383
+Gujarat Lions,death,1082,601,45,10.802,0.0749
+Gujarat Lions,middle,2507,1824,57,8.2467,0.0312
+Gujarat Lions,powerplay,1501,1120,49,8.0411,0.0438
+Gujarat Titans,death,1492,929,91,9.6362,0.098
+Gujarat Titans,middle,3681,2692,130,8.2043,0.0483
+Gujarat Titans,powerplay,2302,1680,77,8.2214,0.0458
+Kochi Tuskers Kerala,death,361,248,20,8.7339,0.0806
+Kochi Tuskers Kerala,middle,1032,835,32,7.4156,0.0383
+Kochi Tuskers Kerala,powerplay,593,531,22,6.7006,0.0414
+Kolkata Knight Riders,death,8300,5192,446,9.5917,0.0859
+Kolkata Knight Riders,middle,18816,15039,681,7.5069,0.0453
+Kolkata Knight Riders,powerplay,11970,9432,337,7.6145,0.0357
+Lucknow Super Giants,death,1693,992,82,10.2399,0.0827
+Lucknow Super Giants,middle,3390,2622,125,7.7574,0.0477
+Lucknow Super Giants,powerplay,2332,1612,57,8.6799,0.0354
+Mumbai Indians,death,8646,5573,483,9.3085,0.0867
+Mumbai Indians,middle,20820,16146,715,7.7369,0.0443
+Mumbai Indians,powerplay,11830,9786,393,7.2532,0.0402
+Pune Warriors,death,1582,980,71,9.6857,0.0724
+Pune Warriors,middle,3289,2759,110,7.1526,0.0399
+Pune Warriors,powerplay,1986,1718,57,6.936,0.0332
+Punjab Kings,death,8598,5112,465,10.0915,0.091
+Punjab Kings,middle,19471,14852,612,7.866,0.0412
+Punjab Kings,powerplay,11937,9238,334,7.753,0.0362
+Rajasthan Royals,death,7836,4739,386,9.9211,0.0815
+Rajasthan Royals,middle,17045,13399,548,7.6327,0.0409
+Rajasthan Royals,powerplay,10261,8294,343,7.423,0.0414
+Rising Pune Supergiants,death,1046,639,63,9.8216,0.0986
+Rising Pune Supergiants,middle,2069,1782,80,6.9663,0.0449
+Rising Pune Supergiants,powerplay,1434,1122,46,7.6684,0.041
+Royal Challengers Bengaluru,death,8831,5375,460,9.8579,0.0856
+Royal Challengers Bengaluru,middle,19856,15253,672,7.8107,0.0441
+Royal Challengers Bengaluru,powerplay,12114,9531,362,7.6261,0.038
+Sunrisers Hyderabad,death,6294,3976,344,9.498,0.0865
+Sunrisers Hyderabad,middle,14251,10966,484,7.7974,0.0441
+Sunrisers Hyderabad,powerplay,8558,6775,246,7.579,0.0363

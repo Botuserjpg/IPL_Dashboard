@@ -1,0 +1,167 @@
+team,opponent,matches,wins,losses,avg_runs,avg_opponent_runs,avg_run_margin,win_rate,matchup_key
+Chennai Super Kings,Royal Challengers Bengaluru,32,21,11,160.06,153.84,6.22,65.62,Chennai Super Kings vs Royal Challengers Bengaluru
+Chennai Super Kings,Delhi Capitals,30,19,11,166.13,148.9,17.23,63.33,Chennai Super Kings vs Delhi Capitals
+Chennai Super Kings,Kolkata Knight Riders,29,19,10,158.9,153.17,5.72,65.52,Chennai Super Kings vs Kolkata Knight Riders
+Chennai Super Kings,Mumbai Indians,37,17,20,155.57,157.76,-2.19,45.95,Chennai Super Kings vs Mumbai Indians
+Chennai Super Kings,Punjab Kings,30,16,14,165.33,161.73,3.6,53.33,Chennai Super Kings vs Punjab Kings
+Chennai Super Kings,Rajasthan Royals,29,16,13,164.86,158.41,6.45,55.17,Chennai Super Kings vs Rajasthan Royals
+Chennai Super Kings,Sunrisers Hyderabad,21,15,6,171.0,160.71,10.29,71.43,Chennai Super Kings vs Sunrisers Hyderabad
+Chennai Super Kings,Deccan Chargers,10,6,4,159.2,141.2,18.0,60.0,Chennai Super Kings vs Deccan Chargers
+Chennai Super Kings,Pune Warriors,6,4,2,150.83,141.83,9.0,66.67,Chennai Super Kings vs Pune Warriors
+Chennai Super Kings,Gujarat Titans,7,3,4,175.0,176.29,-1.29,42.86,Chennai Super Kings vs Gujarat Titans
+Chennai Super Kings,Kochi Tuskers Kerala,2,1,1,141.5,138.0,3.5,50.0,Chennai Super Kings vs Kochi Tuskers Kerala
+Chennai Super Kings,Lucknow Super Giants,5,1,3,203.25,186.8,1.0,20.0,Chennai Super Kings vs Lucknow Super Giants
+Deccan Chargers,Royal Challengers Bengaluru,11,6,5,155.45,150.18,5.27,54.55,Deccan Chargers vs Royal Challengers Bengaluru
+Deccan Chargers,Chennai Super Kings,10,4,6,141.2,159.2,-18.0,40.0,Deccan Chargers vs Chennai Super Kings
+Deccan Chargers,Delhi Capitals,11,4,7,162.73,163.09,-0.36,36.36,Deccan Chargers vs Delhi Capitals
+Deccan Chargers,Mumbai Indians,10,4,6,137.5,150.4,-12.9,40.0,Deccan Chargers vs Mumbai Indians
+Deccan Chargers,Pune Warriors,4,3,1,159.25,151.25,8.0,75.0,Deccan Chargers vs Pune Warriors
+Deccan Chargers,Punjab Kings,10,3,7,168.6,163.2,5.4,30.0,Deccan Chargers vs Punjab Kings
+Deccan Chargers,Kolkata Knight Riders,9,2,7,144.11,153.11,-9.0,22.22,Deccan Chargers vs Kolkata Knight Riders
+Deccan Chargers,Rajasthan Royals,9,2,7,158.56,154.11,4.44,22.22,Deccan Chargers vs Rajasthan Royals
+Deccan Chargers,Kochi Tuskers Kerala,1,1,0,129.0,74.0,55.0,100.0,Deccan Chargers vs Kochi Tuskers Kerala
+Delhi Capitals,Mumbai Indians,35,16,19,153.26,166.83,-13.57,45.71,Delhi Capitals vs Mumbai Indians
+Delhi Capitals,Punjab Kings,33,16,17,147.55,147.42,0.12,48.48,Delhi Capitals vs Punjab Kings
+Delhi Capitals,Kolkata Knight Riders,33,15,18,153.88,157.91,-4.03,45.45,Delhi Capitals vs Kolkata Knight Riders
+Delhi Capitals,Rajasthan Royals,29,14,15,156.17,160.34,-4.17,48.28,Delhi Capitals vs Rajasthan Royals
+Delhi Capitals,Chennai Super Kings,30,11,19,148.9,166.13,-17.23,36.67,Delhi Capitals vs Chennai Super Kings
+Delhi Capitals,Royal Challengers Bengaluru,31,11,19,163.58,158.74,4.84,35.48,Delhi Capitals vs Royal Challengers Bengaluru
+Delhi Capitals,Sunrisers Hyderabad,24,11,13,159.12,159.42,-0.29,45.83,Delhi Capitals vs Sunrisers Hyderabad
+Delhi Capitals,Deccan Chargers,11,7,4,163.09,162.73,0.36,63.64,Delhi Capitals vs Deccan Chargers
+Delhi Capitals,Gujarat Lions,4,3,1,183.0,181.0,2.0,75.0,Delhi Capitals vs Gujarat Lions
+Delhi Capitals,Gujarat Titans,5,3,2,153.0,153.6,-0.6,60.0,Delhi Capitals vs Gujarat Titans
+Delhi Capitals,Pune Warriors,6,3,2,144.0,169.2,-7.6,50.0,Delhi Capitals vs Pune Warriors
+Delhi Capitals,Lucknow Super Giants,5,2,3,171.8,179.8,-8.0,40.0,Delhi Capitals vs Lucknow Super Giants
+Delhi Capitals,Rising Pune Supergiants,4,2,2,164.0,127.75,36.25,50.0,Delhi Capitals vs Rising Pune Supergiants
+Delhi Capitals,Kochi Tuskers Kerala,2,1,1,148.5,130.0,18.5,50.0,Delhi Capitals vs Kochi Tuskers Kerala
+Gujarat Lions,Kolkata Knight Riders,4,3,1,165.0,163.25,1.75,75.0,Gujarat Lions vs Kolkata Knight Riders
+Gujarat Lions,Rising Pune Supergiants,4,3,1,173.25,174.0,-0.75,75.0,Gujarat Lions vs Rising Pune Supergiants
+Gujarat Lions,Mumbai Indians,4,2,2,162.25,161.25,1.0,50.0,Gujarat Lions vs Mumbai Indians
+Gujarat Lions,Punjab Kings,4,2,2,161.75,173.0,-11.25,50.0,Gujarat Lions vs Punjab Kings
+Gujarat Lions,Royal Challengers Bengaluru,5,2,3,154.2,186.8,-32.6,40.0,Gujarat Lions vs Royal Challengers Bengaluru
+Gujarat Lions,Delhi Capitals,4,1,3,181.0,183.0,-2.0,25.0,Gujarat Lions vs Delhi Capitals
+Gujarat Lions,Sunrisers Hyderabad,5,0,5,142.4,145.4,-3.0,0.0,Gujarat Lions vs Sunrisers Hyderabad
+Gujarat Titans,Rajasthan Royals,6,5,1,168.5,161.0,7.5,83.33,Gujarat Titans vs Rajasthan Royals
+Gujarat Titans,Chennai Super Kings,7,4,3,176.29,175.0,1.29,57.14,Gujarat Titans vs Chennai Super Kings
+Gujarat Titans,Lucknow Super Giants,5,4,1,159.4,140.4,19.0,80.0,Gujarat Titans vs Lucknow Super Giants
+Gujarat Titans,Mumbai Indians,5,3,2,194.2,176.0,18.2,60.0,Gujarat Titans vs Mumbai Indians
+Gujarat Titans,Punjab Kings,5,3,2,166.4,165.8,0.6,60.0,Gujarat Titans vs Punjab Kings
+Gujarat Titans,Sunrisers Hyderabad,4,3,1,179.25,169.75,9.5,75.0,Gujarat Titans vs Sunrisers Hyderabad
+Gujarat Titans,Delhi Capitals,5,2,3,153.6,153.0,0.6,40.0,Gujarat Titans vs Delhi Capitals
+Gujarat Titans,Kolkata Knight Riders,3,2,1,180.0,178.0,2.0,66.67,Gujarat Titans vs Kolkata Knight Riders
+Gujarat Titans,Royal Challengers Bengaluru,5,2,3,177.4,179.0,-1.6,40.0,Gujarat Titans vs Royal Challengers Bengaluru
+Kochi Tuskers Kerala,Kolkata Knight Riders,2,2,0,144.0,132.5,11.5,100.0,Kochi Tuskers Kerala vs Kolkata Knight Riders
+Kochi Tuskers Kerala,Chennai Super Kings,2,1,1,138.0,141.5,-3.5,50.0,Kochi Tuskers Kerala vs Chennai Super Kings
+Kochi Tuskers Kerala,Delhi Capitals,2,1,1,130.0,148.5,-18.5,50.0,Kochi Tuskers Kerala vs Delhi Capitals
+Kochi Tuskers Kerala,Mumbai Indians,1,1,0,184.0,182.0,2.0,100.0,Kochi Tuskers Kerala vs Mumbai Indians
+Kochi Tuskers Kerala,Rajasthan Royals,2,1,1,103.5,104.0,-0.5,50.0,Kochi Tuskers Kerala vs Rajasthan Royals
+Kochi Tuskers Kerala,Deccan Chargers,1,0,1,74.0,129.0,-55.0,0.0,Kochi Tuskers Kerala vs Deccan Chargers
+Kochi Tuskers Kerala,Pune Warriors,1,0,1,148.0,151.0,-3.0,0.0,Kochi Tuskers Kerala vs Pune Warriors
+Kochi Tuskers Kerala,Punjab Kings,1,0,1,178.0,181.0,-3.0,0.0,Kochi Tuskers Kerala vs Punjab Kings
+Kochi Tuskers Kerala,Royal Challengers Bengaluru,2,0,2,143.0,145.0,-2.0,0.0,Kochi Tuskers Kerala vs Royal Challengers Bengaluru
+Kolkata Knight Riders,Punjab Kings,33,21,12,163.88,162.58,1.3,63.64,Kolkata Knight Riders vs Punjab Kings
+Kolkata Knight Riders,Royal Challengers Bengaluru,34,20,14,159.88,151.32,8.56,58.82,Kolkata Knight Riders vs Royal Challengers Bengaluru
+Kolkata Knight Riders,Sunrisers Hyderabad,28,19,9,155.86,157.57,-1.71,67.86,Kolkata Knight Riders vs Sunrisers Hyderabad
+Kolkata Knight Riders,Delhi Capitals,33,18,15,157.91,153.88,4.03,54.55,Kolkata Knight Riders vs Delhi Capitals
+Kolkata Knight Riders,Rajasthan Royals,28,14,14,153.64,150.79,2.86,50.0,Kolkata Knight Riders vs Rajasthan Royals
+Kolkata Knight Riders,Mumbai Indians,34,11,23,151.0,156.71,-5.71,32.35,Kolkata Knight Riders vs Mumbai Indians
+Kolkata Knight Riders,Chennai Super Kings,29,10,19,153.17,158.9,-5.72,34.48,Kolkata Knight Riders vs Chennai Super Kings
+Kolkata Knight Riders,Deccan Chargers,9,7,2,153.11,144.11,9.0,77.78,Kolkata Knight Riders vs Deccan Chargers
+Kolkata Knight Riders,Pune Warriors,5,4,1,144.0,127.8,16.2,80.0,Kolkata Knight Riders vs Pune Warriors
+Kolkata Knight Riders,Rising Pune Supergiants,4,3,1,141.75,150.75,-9.0,75.0,Kolkata Knight Riders vs Rising Pune Supergiants
+Kolkata Knight Riders,Lucknow Super Giants,5,2,3,176.2,172.0,4.2,40.0,Kolkata Knight Riders vs Lucknow Super Giants
+Kolkata Knight Riders,Gujarat Lions,4,1,3,163.25,165.0,-1.75,25.0,Kolkata Knight Riders vs Gujarat Lions
+Kolkata Knight Riders,Gujarat Titans,3,1,2,178.0,180.0,-2.0,33.33,Kolkata Knight Riders vs Gujarat Titans
+Kolkata Knight Riders,Kochi Tuskers Kerala,2,0,2,132.5,144.0,-11.5,0.0,Kolkata Knight Riders vs Kochi Tuskers Kerala
+Lucknow Super Giants,Mumbai Indians,6,5,1,167.33,167.83,-0.5,83.33,Lucknow Super Giants vs Mumbai Indians
+Lucknow Super Giants,Chennai Super Kings,5,3,1,186.8,203.25,-1.0,60.0,Lucknow Super Giants vs Chennai Super Kings
+Lucknow Super Giants,Delhi Capitals,5,3,2,179.8,171.8,8.0,60.0,Lucknow Super Giants vs Delhi Capitals
+Lucknow Super Giants,Kolkata Knight Riders,5,3,2,172.0,176.2,-4.2,60.0,Lucknow Super Giants vs Kolkata Knight Riders
+Lucknow Super Giants,Punjab Kings,4,3,1,192.0,168.25,23.75,75.0,Lucknow Super Giants vs Punjab Kings
+Lucknow Super Giants,Sunrisers Hyderabad,4,3,1,161.5,156.75,4.75,75.0,Lucknow Super Giants vs Sunrisers Hyderabad
+Lucknow Super Giants,Royal Challengers Bengaluru,5,2,3,171.6,175.8,-4.2,40.0,Lucknow Super Giants vs Royal Challengers Bengaluru
+Lucknow Super Giants,Gujarat Titans,5,1,4,140.4,159.4,-19.0,20.0,Lucknow Super Giants vs Gujarat Titans
+Lucknow Super Giants,Rajasthan Royals,5,1,4,167.8,175.8,-8.0,20.0,Lucknow Super Giants vs Rajasthan Royals
+Mumbai Indians,Kolkata Knight Riders,34,23,11,156.71,151.0,5.71,67.65,Mumbai Indians vs Kolkata Knight Riders
+Mumbai Indians,Chennai Super Kings,37,20,17,157.76,155.57,2.19,54.05,Mumbai Indians vs Chennai Super Kings
+Mumbai Indians,Delhi Capitals,35,19,16,166.83,153.26,13.57,54.29,Mumbai Indians vs Delhi Capitals
+Mumbai Indians,Royal Challengers Bengaluru,33,19,14,166.48,162.94,3.55,57.58,Mumbai Indians vs Royal Challengers Bengaluru
+Mumbai Indians,Punjab Kings,32,17,15,165.88,169.03,-3.16,53.12,Mumbai Indians vs Punjab Kings
+Mumbai Indians,Rajasthan Royals,29,15,14,162.14,159.9,2.24,51.72,Mumbai Indians vs Rajasthan Royals
+Mumbai Indians,Sunrisers Hyderabad,23,13,10,161.26,161.3,-0.04,56.52,Mumbai Indians vs Sunrisers Hyderabad
+Mumbai Indians,Deccan Chargers,10,6,4,150.4,137.5,12.9,60.0,Mumbai Indians vs Deccan Chargers
+Mumbai Indians,Pune Warriors,6,5,1,134.0,126.5,7.5,83.33,Mumbai Indians vs Pune Warriors
+Mumbai Indians,Gujarat Lions,4,2,2,161.25,162.25,-1.0,50.0,Mumbai Indians vs Gujarat Lions
+Mumbai Indians,Gujarat Titans,5,2,3,176.0,194.2,-18.2,40.0,Mumbai Indians vs Gujarat Titans
+Mumbai Indians,Rising Pune Supergiants,6,2,4,149.0,153.67,-4.67,33.33,Mumbai Indians vs Rising Pune Supergiants
+Mumbai Indians,Lucknow Super Giants,6,1,5,167.83,167.33,0.5,16.67,Mumbai Indians vs Lucknow Super Giants
+Mumbai Indians,Kochi Tuskers Kerala,1,0,1,182.0,184.0,-2.0,0.0,Mumbai Indians vs Kochi Tuskers Kerala
+Pune Warriors,Punjab Kings,6,3,3,133.0,129.5,3.5,50.0,Pune Warriors vs Punjab Kings
+Pune Warriors,Chennai Super Kings,6,2,4,141.83,150.83,-9.0,33.33,Pune Warriors vs Chennai Super Kings
+Pune Warriors,Delhi Capitals,6,2,3,169.2,144.0,7.6,33.33,Pune Warriors vs Delhi Capitals
+Pune Warriors,Deccan Chargers,4,1,3,151.25,159.25,-8.0,25.0,Pune Warriors vs Deccan Chargers
+Pune Warriors,Kochi Tuskers Kerala,1,1,0,151.0,148.0,3.0,100.0,Pune Warriors vs Kochi Tuskers Kerala
+Pune Warriors,Kolkata Knight Riders,5,1,4,127.8,144.0,-16.2,20.0,Pune Warriors vs Kolkata Knight Riders
+Pune Warriors,Mumbai Indians,6,1,5,126.5,134.0,-7.5,16.67,Pune Warriors vs Mumbai Indians
+Pune Warriors,Rajasthan Royals,5,1,4,143.8,153.4,-9.6,20.0,Pune Warriors vs Rajasthan Royals
+Pune Warriors,Royal Challengers Bengaluru,5,0,5,155.6,198.0,-42.4,0.0,Pune Warriors vs Royal Challengers Bengaluru
+Pune Warriors,Sunrisers Hyderabad,2,0,2,106.0,122.5,-16.5,0.0,Pune Warriors vs Sunrisers Hyderabad
+Punjab Kings,Delhi Capitals,33,17,16,147.42,147.55,-0.12,51.52,Punjab Kings vs Delhi Capitals
+Punjab Kings,Royal Challengers Bengaluru,33,17,16,162.39,163.82,-1.42,51.52,Punjab Kings vs Royal Challengers Bengaluru
+Punjab Kings,Mumbai Indians,32,15,17,169.03,165.88,3.16,46.88,Punjab Kings vs Mumbai Indians
+Punjab Kings,Chennai Super Kings,30,14,16,161.73,165.33,-3.6,46.67,Punjab Kings vs Chennai Super Kings
+Punjab Kings,Kolkata Knight Riders,33,12,21,162.58,163.88,-1.3,36.36,Punjab Kings vs Kolkata Knight Riders
+Punjab Kings,Rajasthan Royals,28,12,16,170.07,172.75,-2.68,42.86,Punjab Kings vs Rajasthan Royals
+Punjab Kings,Deccan Chargers,10,7,3,163.2,168.6,-5.4,70.0,Punjab Kings vs Deccan Chargers
+Punjab Kings,Sunrisers Hyderabad,23,7,16,156.3,161.26,-4.96,30.43,Punjab Kings vs Sunrisers Hyderabad
+Punjab Kings,Pune Warriors,6,3,3,129.5,133.0,-3.5,50.0,Punjab Kings vs Pune Warriors
+Punjab Kings,Gujarat Lions,4,2,2,173.0,161.75,11.25,50.0,Punjab Kings vs Gujarat Lions
+Punjab Kings,Gujarat Titans,5,2,3,165.8,166.4,-0.6,40.0,Punjab Kings vs Gujarat Titans
+Punjab Kings,Rising Pune Supergiants,4,2,2,140.5,141.5,-1.0,50.0,Punjab Kings vs Rising Pune Supergiants
+Punjab Kings,Kochi Tuskers Kerala,1,1,0,181.0,178.0,3.0,100.0,Punjab Kings vs Kochi Tuskers Kerala
+Punjab Kings,Lucknow Super Giants,4,1,3,168.25,192.0,-23.75,25.0,Punjab Kings vs Lucknow Super Giants
+Rajasthan Royals,Punjab Kings,28,16,12,172.75,170.07,2.68,57.14,Rajasthan Royals vs Punjab Kings
+Rajasthan Royals,Delhi Capitals,29,15,14,160.34,156.17,4.17,51.72,Rajasthan Royals vs Delhi Capitals
+Rajasthan Royals,Kolkata Knight Riders,28,14,14,150.79,153.64,-2.86,50.0,Rajasthan Royals vs Kolkata Knight Riders
+Rajasthan Royals,Mumbai Indians,29,14,15,159.9,162.14,-2.24,48.28,Rajasthan Royals vs Mumbai Indians
+Rajasthan Royals,Royal Challengers Bengaluru,31,14,15,143.93,150.23,-4.63,45.16,Rajasthan Royals vs Royal Challengers Bengaluru
+Rajasthan Royals,Chennai Super Kings,29,13,16,158.41,164.86,-6.45,44.83,Rajasthan Royals vs Chennai Super Kings
+Rajasthan Royals,Sunrisers Hyderabad,20,9,11,162.35,158.25,4.1,45.0,Rajasthan Royals vs Sunrisers Hyderabad
+Rajasthan Royals,Deccan Chargers,9,7,2,154.11,158.56,-4.44,77.78,Rajasthan Royals vs Deccan Chargers
+Rajasthan Royals,Lucknow Super Giants,5,4,1,175.8,167.8,8.0,80.0,Rajasthan Royals vs Lucknow Super Giants
+Rajasthan Royals,Pune Warriors,5,4,1,153.4,143.8,9.6,80.0,Rajasthan Royals vs Pune Warriors
+Rajasthan Royals,Gujarat Titans,6,1,5,161.0,168.5,-7.5,16.67,Rajasthan Royals vs Gujarat Titans
+Rajasthan Royals,Kochi Tuskers Kerala,2,1,1,104.0,103.5,0.5,50.0,Rajasthan Royals vs Kochi Tuskers Kerala
+Rising Pune Supergiants,Mumbai Indians,6,4,2,153.67,149.0,4.67,66.67,Rising Pune Supergiants vs Mumbai Indians
+Rising Pune Supergiants,Sunrisers Hyderabad,4,3,1,138.5,141.75,-3.25,75.0,Rising Pune Supergiants vs Sunrisers Hyderabad
+Rising Pune Supergiants,Delhi Capitals,4,2,2,127.75,164.0,-36.25,50.0,Rising Pune Supergiants vs Delhi Capitals
+Rising Pune Supergiants,Punjab Kings,4,2,2,141.5,140.5,1.0,50.0,Rising Pune Supergiants vs Punjab Kings
+Rising Pune Supergiants,Royal Challengers Bengaluru,4,2,2,170.25,152.5,17.75,50.0,Rising Pune Supergiants vs Royal Challengers Bengaluru
+Rising Pune Supergiants,Gujarat Lions,4,1,3,174.0,173.25,0.75,25.0,Rising Pune Supergiants vs Gujarat Lions
+Rising Pune Supergiants,Kolkata Knight Riders,4,1,3,150.75,141.75,9.0,25.0,Rising Pune Supergiants vs Kolkata Knight Riders
+Royal Challengers Bengaluru,Delhi Capitals,31,19,11,158.74,163.58,-4.84,61.29,Royal Challengers Bengaluru vs Delhi Capitals
+Royal Challengers Bengaluru,Punjab Kings,33,16,17,163.82,162.39,1.42,48.48,Royal Challengers Bengaluru vs Punjab Kings
+Royal Challengers Bengaluru,Rajasthan Royals,31,15,14,150.23,143.93,4.63,48.39,Royal Challengers Bengaluru vs Rajasthan Royals
+Royal Challengers Bengaluru,Kolkata Knight Riders,34,14,20,151.32,159.88,-8.56,41.18,Royal Challengers Bengaluru vs Kolkata Knight Riders
+Royal Challengers Bengaluru,Mumbai Indians,33,14,19,162.94,166.48,-3.55,42.42,Royal Challengers Bengaluru vs Mumbai Indians
+Royal Challengers Bengaluru,Chennai Super Kings,32,11,21,153.84,160.06,-6.22,34.38,Royal Challengers Bengaluru vs Chennai Super Kings
+Royal Challengers Bengaluru,Sunrisers Hyderabad,24,11,13,162.58,166.33,-3.75,45.83,Royal Challengers Bengaluru vs Sunrisers Hyderabad
+Royal Challengers Bengaluru,Deccan Chargers,11,5,6,150.18,155.45,-5.27,45.45,Royal Challengers Bengaluru vs Deccan Chargers
+Royal Challengers Bengaluru,Pune Warriors,5,5,0,198.0,155.6,42.4,100.0,Royal Challengers Bengaluru vs Pune Warriors
+Royal Challengers Bengaluru,Gujarat Lions,5,3,2,186.8,154.2,32.6,60.0,Royal Challengers Bengaluru vs Gujarat Lions
+Royal Challengers Bengaluru,Gujarat Titans,5,3,2,179.0,177.4,1.6,60.0,Royal Challengers Bengaluru vs Gujarat Titans
+Royal Challengers Bengaluru,Lucknow Super Giants,5,3,2,175.8,171.6,4.2,60.0,Royal Challengers Bengaluru vs Lucknow Super Giants
+Royal Challengers Bengaluru,Kochi Tuskers Kerala,2,2,0,145.0,143.0,2.0,100.0,Royal Challengers Bengaluru vs Kochi Tuskers Kerala
+Royal Challengers Bengaluru,Rising Pune Supergiants,4,2,2,152.5,170.25,-17.75,50.0,Royal Challengers Bengaluru vs Rising Pune Supergiants
+Sunrisers Hyderabad,Punjab Kings,23,16,7,161.26,156.3,4.96,69.57,Sunrisers Hyderabad vs Punjab Kings
+Sunrisers Hyderabad,Delhi Capitals,24,13,11,159.42,159.12,0.29,54.17,Sunrisers Hyderabad vs Delhi Capitals
+Sunrisers Hyderabad,Royal Challengers Bengaluru,24,13,11,166.33,162.58,3.75,54.17,Sunrisers Hyderabad vs Royal Challengers Bengaluru
+Sunrisers Hyderabad,Rajasthan Royals,20,11,9,158.25,162.35,-4.1,55.0,Sunrisers Hyderabad vs Rajasthan Royals
+Sunrisers Hyderabad,Mumbai Indians,23,10,13,161.3,161.26,0.04,43.48,Sunrisers Hyderabad vs Mumbai Indians
+Sunrisers Hyderabad,Kolkata Knight Riders,28,9,19,157.57,155.86,1.71,32.14,Sunrisers Hyderabad vs Kolkata Knight Riders
+Sunrisers Hyderabad,Chennai Super Kings,21,6,15,160.71,171.0,-10.29,28.57,Sunrisers Hyderabad vs Chennai Super Kings
+Sunrisers Hyderabad,Gujarat Lions,5,5,0,145.4,142.4,3.0,100.0,Sunrisers Hyderabad vs Gujarat Lions
+Sunrisers Hyderabad,Pune Warriors,2,2,0,122.5,106.0,16.5,100.0,Sunrisers Hyderabad vs Pune Warriors
+Sunrisers Hyderabad,Gujarat Titans,4,1,3,169.75,179.25,-9.5,25.0,Sunrisers Hyderabad vs Gujarat Titans
+Sunrisers Hyderabad,Lucknow Super Giants,4,1,3,156.75,161.5,-4.75,25.0,Sunrisers Hyderabad vs Lucknow Super Giants
+Sunrisers Hyderabad,Rising Pune Supergiants,4,1,3,141.75,138.5,3.25,25.0,Sunrisers Hyderabad vs Rising Pune Supergiants
